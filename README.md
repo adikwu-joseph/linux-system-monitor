@@ -96,4 +96,4 @@ REFRESH=5  # change to any number of seconds
 ---
 
 ## Author
-Built as part of a Linux/Bash learning track alongside a Software Engineering job search.
+Adikwu Ochigbo
