@@ -1,99 +1,92 @@
-# Linux System Monitor — Bash
+# 😊 Smile Game
 
-A lightweight real-time system monitoring script written in Bash. Displays CPU usage, RAM, disk usage, network interfaces, top processes, and system uptime — refreshing every 5 seconds.
+A full-stack browser-based game with user authentication, session management, and a MySQL database backend — built with PHP and Laragon.
 
 ---
 
 ## Features
-- Real-time CPU usage measured via `/proc/stat` delta (accurate, no `top` dependency)
-- RAM usage (used / free / total) with visual progress bar
-- Disk usage per physical partition
-- Active network interfaces and IP addresses
-- Top 5 processes by CPU consumption
-- System uptime
-- Auto-refresh every 5 seconds
+
+- User authentication — signup, login, logout
+- Session management across game screens
+- MySQL database for persisting user data
+- Game logic with home screen, active game, and game over screen
+- Clean CSS frontend
 
 ---
 
-## Preview
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | PHP |
+| Database | MySQL |
+| Frontend | HTML, CSS |
+| Dev Environment | Laragon |
+
+---
+
+## Project Structure
+
 ```
-======================================================
-           LINUX SYSTEM MONITOR
-   2026-03-28 14:32:01   |   Refreshes every 5s
-======================================================
-
---- CPU USAGE ---
-  Usage: 23.4%
-  [████░░░░░░░░░░░░░░░░]
-
---- MEMORY (RAM) ---
-  Total:  7856 MB
-  Used:   3102 MB  (39.5%)
-  Free:   4754 MB
-  [████████░░░░░░░░░░░░]
-
---- DISK USAGE ---
-  /dev/sda1   50G   18G   32G   36%   /
-
---- NETWORK INTERFACES ---
-  eth0       UP           192.168.1.5/24
-
---- TOP 5 PROCESSES (by CPU) ---
-  PID      NAME                 CPU%     MEM%
-  ----------------------------------------
-  1234     firefox              12.3     4.1
-  5678     code                 8.1      3.2
-
---- SYSTEM UPTIME ---
-  up 3 hours, 42 minutes
+group-smile-game/
+├── index.php           # Entry point / landing page
+├── home.php            # Home screen
+├── game.php            # Main game screen
+├── gameover.php        # Game over screen
+├── login.php           # User login
+├── signup.php          # User registration
+├── signup-check.php    # Registration validation
+├── logout.php          # Session termination
+├── db_conn.php         # Database connection
+├── css/                # Stylesheets
+├── images/             # Game assets
+└── db/                 # Database schema
 ```
 
 ---
 
-## Requirements
-- Linux (Ubuntu / Debian / WSL)
-- `bc` — for memory percentage arithmetic
-- `iproute2` — for network interface display (pre-installed on most distros)
+## How to Run Locally
 
-```bash
-sudo apt install bc
-```
+### Prerequisites
+- [Laragon](https://laragon.org/) installed on Windows
+- PHP and MySQL enabled in Laragon
 
-> This script will not run on macOS. Commands like `free`, `ip`, and `/proc/stat` are Linux-specific.
+### Steps
 
----
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/stoppa5107/Smile-Game.git
+   ```
 
-## Getting Started
+2. **Move to Laragon's web root**
+   ```
+   C:\laragon\www\Smile-Game\
+   ```
 
-```bash
-git clone https://github.com/YOUR_USERNAME/linux-system-monitor.git
-cd linux-system-monitor
-chmod +x sysmonitor.sh
-./sysmonitor.sh
-```
+3. **Import the database**
+   - Open Laragon → click **Database** (HeidiSQL or phpMyAdmin)
+   - Create a new database e.g. `smile_game`
+   - Import the SQL file from the `db/` folder
 
-Press `Ctrl+C` to exit.
+4. **Update database connection**
+   - Open `db_conn.php`
+   - Update the credentials to match your local setup:
+   ```php
+   $host = 'localhost';
+   $dbname = 'smile_game';
+   $username = 'root';
+   $password = '';
+   ```
 
----
-
-## Customisation
-Change the refresh rate by editing line 7:
-```bash
-REFRESH=5  # change to any number of seconds
-```
-
----
-
-## Concepts Demonstrated
-- Bash scripting and modular functions
-- Reading system data from `/proc/stat` for accurate CPU measurement
-- Linux commands: `free`, `df`, `ps`, `ip`, `uptime`
-- Text processing with `awk` and `grep`
-- Arithmetic with `bc` and `awk`
-- Process management and sorting with `ps aux`
-- Formatted terminal output with `printf`
+5. **Start Laragon and visit**
+   ```
+   http://localhost/Smile-Game/
+   ```
 
 ---
 
 ## Author
-Built as part of a Linux/Bash learning track alongside a Software Engineering job search.
+
+**Adikwu Joseph Ochigbo**
+- GitHub: [stoppa5107](https://github.com/stoppa5107)
+- Portfolio: [stoppa5107.github.io](https://stoppa5107.github.io)
